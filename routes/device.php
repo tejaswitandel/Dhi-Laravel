@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Device\AuthController;
+use App\Http\Controllers\API\Device\BlogController;
 use App\Http\Controllers\API\Device\CustomerController;
 use App\Http\Controllers\API\Device\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,20 @@ Route::group(['middleware' => ['auth:sanctum', 'validate.user']], function () {
         ->middleware(['permission:update_customer']);
 });
 
+Route::get('blogs', [BlogController::class, 'index'])
+    ->name('blogs.index');
+Route::get('blogs/{blog}', [BlogController::class, 'show'])
+    ->name('blog.show');
+Route::post('blogs', [BlogController::class, 'store'])
+    ->name('blog.store');
+Route::put('blogs/{blog}', [BlogController::class, 'update'])
+    ->name('blog.update');
+Route::delete('blogs/{blog}', [BlogController::class, 'delete'])
+    ->name('blog.delete');
+Route::post('blogs/bulk-create', [BlogController::class, 'bulkStore'])
+    ->name('blog.store.bulk');
+Route::post('blogs/bulk-update', [BlogController::class, 'bulkUpdate'])
+    ->name('blog.update.bulk');
 Route::get('users', [UserController::class, 'index'])
     ->name('users.index');
 Route::get('users/{user}', [UserController::class, 'show'])

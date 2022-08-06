@@ -15,6 +15,10 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'create_blog',
+            'read_blog',
+            'update_blog',
+            'delete_blog',
             'create_customer',
             'read_customer',
             'update_customer',

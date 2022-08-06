@@ -13,6 +13,11 @@ class CreateForeignKeys extends Migration
      */
     public function up()
     {
+        Schema::table('blogs', function (Blueprint $table) {
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null')->onUpdate('set null');
+            $table->foreign('added_by')->references('id')->on('users')->onDelete('set null')->onUpdate('set null');
+        });
+
         Schema::table('customers', function (Blueprint $table) {
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null')->onUpdate('set null');
             $table->foreign('added_by')->references('id')->on('users')->onDelete('set null')->onUpdate('set null');

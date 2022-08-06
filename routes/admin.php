@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Admin\AuthController;
+use App\Http\Controllers\API\Admin\BlogController;
 use App\Http\Controllers\API\Admin\CustomerController;
 use App\Http\Controllers\API\Admin\PermissionController;
 use App\Http\Controllers\API\Admin\RoleController;
@@ -74,6 +75,20 @@ Route::group(['middleware' => ['auth:sanctum', 'validate.user']], function () {
         ->middleware(['permission:manage_roles']);
 });
 
+Route::get('blogs', [BlogController::class, 'index'])
+    ->name('blogs.index');
+Route::get('blogs/{blog}', [BlogController::class, 'show'])
+    ->name('blog.show');
+Route::post('blogs', [BlogController::class, 'store'])
+    ->name('blog.store');
+Route::put('blogs/{blog}', [BlogController::class, 'update'])
+    ->name('blog.update');
+Route::delete('blogs/{blog}', [BlogController::class, 'delete'])
+    ->name('blog.delete');
+Route::post('blogs/bulk-create', [BlogController::class, 'bulkStore'])
+    ->name('blog.store.bulk');
+Route::post('blogs/bulk-update', [BlogController::class, 'bulkUpdate'])
+    ->name('blog.update.bulk');
 Route::get('users', [UserController::class, 'index'])
     ->name('users.index');
 Route::get('users/{user}', [UserController::class, 'show'])
